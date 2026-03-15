@@ -4,7 +4,14 @@ require("dotenv").config();
 const Groq = require("groq-sdk");
 
 const app = express();
-app.use(cors({ origin: "*", methods: ["GET", "POST"], allowedHeaders: ["Content-Type"] }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://farhans-chatbot.vercel.app"
+  ],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
 app.use(express.json());
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
