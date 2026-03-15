@@ -3,10 +3,11 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #080808; font-family: 'Sora', sans-serif; }
 
-.chat-wrap { display: flex; height: 100vh; background: #0d0d0d; }
+.chat-wrap { display: flex; height: 100vh; background: #0d0d0d; position: relative; overflow: hidden; }
 
-.sidebar { width: 230px; background: #111; border-right: 0.5px solid #222; display: flex; flex-direction: column; padding: 16px 12px; gap: 6px; flex-shrink: 0; }
-.logo-area { display: flex; align-items: center; gap: 10px; padding: 8px 4px 16px; border-bottom: 0.5px solid #222; margin-bottom: 4px; }
+/* Sidebar */
+.sidebar { width: 230px; background: #111; border-right: 0.5px solid #222; display: flex; flex-direction: column; padding: 16px 12px; gap: 6px; flex-shrink: 0; transition: transform 0.3s ease; }
+.logo-area { display: flex; align-items: center; gap: 10px; padding: 8px 4px 16px; border-bottom: 0.5px solid #222; margin-bottom: 4px; position: relative; }
 .logo-img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
 .logo-text { font-size: 14px; font-weight: 600; color: #fff; }
 .logo-sub { font-size: 10px; color: #555; margin-top: 1px; }
@@ -15,12 +16,22 @@ body { background: #080808; font-family: 'Sora', sans-serif; }
 .sidebar-label { font-size: 10px; color: #444; padding: 4px 12px; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.8px; }
 .chat-item { padding: 8px 12px; border-radius: 8px; font-size: 12px; color: #666; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .chat-item.active { background: #1e1e2e; color: #a5a0ff; }
+.close-sidebar { display: none; background: none; border: none; color: #555; font-size: 16px; cursor: pointer; margin-left: auto; }
 
-.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+/* Main */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+/* Top bar */
 .top-bar { padding: 14px 20px; border-bottom: 0.5px solid #1e1e1e; display: flex; align-items: center; justify-content: space-between; }
+.top-bar-left { display: flex; align-items: center; gap: 10px; }
 .top-bar-title { font-size: 13px; font-weight: 500; color: #ccc; }
-.model-badge { font-size: 11px; color: #555; background: #1a1a1a; border: 0.5px solid #2a2a2a; padding: 4px 10px; border-radius: 20px; }
+.model-badge { font-size: 11px; color: #555; background: #1a1a1a; border: 0.5px solid #2a2a2a; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
 
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 20px; height: 2px; background: #aaa; border-radius: 2px; }
+
+/* Messages */
 .messages { flex: 1; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
 .msg-row { display: flex; gap: 12px; align-items: flex-start; }
 .msg-row.user { flex-direction: row-reverse; }
@@ -29,42 +40,58 @@ body { background: #080808; font-family: 'Sora', sans-serif; }
 .avatar.user { background: #222; color: #aaa; border: 0.5px solid #333; }
 .bubble-wrap { display: flex; flex-direction: column; gap: 4px; max-width: 75%; }
 .msg-row.user .bubble-wrap { align-items: flex-end; }
-.bubble { padding: 11px 15px; border-radius: 14px; font-size: 13px; line-height: 1.7; color: #e0e0e0; }
+.bubble { padding: 11px 15px; border-radius: 14px; font-size: 13px; line-height: 1.7; color: #e0e0e0; word-break: break-word; }
 .bubble.bot { background: #181818; border: 0.5px solid #2a2a2a; border-top-left-radius: 4px; }
 .bubble.user { background: #1e1e2e; border: 0.5px solid #363660; color: #c5c2ff; border-top-right-radius: 4px; }
 .copy-btn { font-size: 11px; color: #444; cursor: pointer; padding: 2px 8px; border-radius: 5px; width: fit-content; }
 .copy-btn:hover { color: #888; background: #1a1a1a; }
 
+/* Typing */
 .typing { display: flex; gap: 4px; padding: 11px 15px; background: #181818; border: 0.5px solid #2a2a2a; border-radius: 14px; border-top-left-radius: 4px; }
 .dot { width: 6px; height: 6px; border-radius: 50%; background: #555; animation: bounce 1.2s infinite; }
 .dot:nth-child(2) { animation-delay: 0.2s; }
 .dot:nth-child(3) { animation-delay: 0.4s; }
 @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px); background:#888;} }
 
+/* Input */
 .input-area { padding: 14px 20px; border-top: 0.5px solid #1e1e1e; }
 .input-box { display: flex; align-items: center; gap: 10px; background: #181818; border: 0.5px solid #2e2e2e; border-radius: 12px; padding: 10px 14px; }
 .input-box input { flex: 1; background: none; border: none; outline: none; color: #ddd; font-size: 13px; font-family: 'Sora', sans-serif; }
 .input-box input::placeholder { color: #444; }
-.send-btn { width: 30px; height: 30px; background: #4f46e5; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; }
+.send-btn { width: 30px; height: 30px; background: #4f46e5; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; flex-shrink: 0; }
 .send-btn:hover { background: #6c63ff; }
 .send-btn:disabled { background: #333; cursor: not-allowed; }
 
+/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
+/* Overlay */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10; }
+
 /* Tablet */
 @media (max-width: 768px) {
-  .sidebar { display: none; }
-  .bubble-wrap { max-width: 90%; }
+  .hamburger { display: flex; }
+  .overlay { display: block; }
+
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    z-index: 20;
+    transform: translateX(-100%);
+    width: 260px;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .close-sidebar { display: block; }
+  .bubble-wrap { max-width: 88%; }
   .messages { padding: 16px 12px; }
   .input-area { padding: 10px 12px; }
-  .top-bar { padding: 10px 14px; }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
   .bubble { font-size: 12px; padding: 9px 12px; }
   .input-box input { font-size: 12px; }
-  .top-bar-title { font-size: 12px; }
   .model-badge { display: none; }
+  .bubble-wrap { max-width: 92%; }
 }
