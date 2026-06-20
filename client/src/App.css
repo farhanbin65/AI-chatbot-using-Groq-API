@@ -11,7 +11,7 @@ body { background: #080808; font-family: 'Sora', sans-serif; }
 .logo-img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
 .logo-text { font-size: 14px; font-weight: 600; color: #fff; }
 .logo-sub { font-size: 10px; color: #555; margin-top: 1px; }
-.new-chat { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 8px; border: 0.5px solid #333; color: #aaa; font-size: 12px; cursor: pointer; }
+.new-chat { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 8px; border: 0.5px solid #333; color: #aaa; font-size: 12px; cursor: pointer; background: transparent; font-family: 'Sora', sans-serif; text-align: left; }
 .new-chat:hover { background: #1a1a1a; color: #fff; }
 .sidebar-label { font-size: 10px; color: #444; padding: 4px 12px; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.8px; }
 .chat-item { padding: 8px 12px; border-radius: 8px; font-size: 12px; color: #666; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -43,7 +43,7 @@ body { background: #080808; font-family: 'Sora', sans-serif; }
 .bubble { padding: 11px 15px; border-radius: 14px; font-size: 13px; line-height: 1.7; color: #e0e0e0; word-break: break-word; }
 .bubble.bot { background: #181818; border: 0.5px solid #2a2a2a; border-top-left-radius: 4px; }
 .bubble.user { background: #1e1e2e; border: 0.5px solid #363660; color: #c5c2ff; border-top-right-radius: 4px; }
-.copy-btn { font-size: 11px; color: #444; cursor: pointer; padding: 2px 8px; border-radius: 5px; width: fit-content; }
+.copy-btn { font-size: 11px; color: #444; cursor: pointer; padding: 2px 8px; border-radius: 5px; width: fit-content; border: none; background: transparent; font-family: 'Sora', sans-serif; }
 .copy-btn:hover { color: #888; background: #1a1a1a; }
 
 /* Typing */
@@ -58,7 +58,7 @@ body { background: #080808; font-family: 'Sora', sans-serif; }
 .input-box { display: flex; align-items: center; gap: 10px; background: #181818; border: 0.5px solid #2e2e2e; border-radius: 12px; padding: 10px 14px; }
 .input-box input { flex: 1; background: none; border: none; outline: none; color: #ddd; font-size: 13px; font-family: 'Sora', sans-serif; }
 .input-box input::placeholder { color: #444; }
-.send-btn { width: 30px; height: 30px; background: #4f46e5; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 13px; flex-shrink: 0; }
+.send-btn { min-width: 54px; height: 30px; padding: 0 12px; background: #4f46e5; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 12px; font-family: 'Sora', sans-serif; flex-shrink: 0; }
 .send-btn:hover { background: #6c63ff; }
 .send-btn:disabled { background: #333; cursor: not-allowed; }
 
