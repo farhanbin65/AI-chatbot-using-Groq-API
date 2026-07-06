@@ -11,7 +11,7 @@ A full-stack AI portfolio assistant built with React, Node.js, Express, and the 
 - Typing indicator
 - Responsive sidebar layout
 - Environment-based API configuration
-- Basic backend validation and production-safe errors
+- Basic backend validation and production safe errors
 
 ## Tech Stack
 
