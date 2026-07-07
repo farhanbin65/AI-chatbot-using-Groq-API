@@ -6,7 +6,7 @@ A full-stack AI portfolio assistant built with React, Node.js, Express, and the 
 
 - React chat interface
 - Express API server
-- Groq-powered AI responses
+- Groq powered AI responses
 - Copy response action
 - Typing indicator
 - Responsive sidebar layout
